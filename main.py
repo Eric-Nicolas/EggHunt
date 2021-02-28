@@ -17,19 +17,36 @@ WIDTH, HEIGHT = 800, 480
 WIN: pygame.Surface = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Egg Hunt")
 
-basket = Basket(WIN)
 
-is_running = True
-while is_running:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            pygame.quit()
-            quit()
+def main() -> None:
+    basket = Basket(WIN)
+    is_running = True
 
-    WIN.fill(WHITE)
-    WIN.blit(BACKGROUND_IMG, (0, 0))
-    WIN.blit(GROUND_IMG, (0, 0))
+    while is_running:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+                quit()
 
-    basket.draw(WIN)
+        keys_pressed = pygame.key.get_pressed()
 
-    pygame.display.update()
+        if keys_pressed[pygame.K_LEFT]:
+            basket.move_left()
+        elif keys_pressed[pygame.K_RIGHT]:
+            basket.move_right()
+        else:
+            basket.idle()
+
+        basket.update()
+
+        WIN.fill(WHITE)
+        WIN.blit(BACKGROUND_IMG, (0, 0))
+        WIN.blit(GROUND_IMG, (0, 0))
+
+        basket.draw(WIN)
+
+        pygame.display.update()
+
+
+if __name__ == '__main__':
+    main()
