@@ -17,6 +17,9 @@ WIDTH, HEIGHT = 800, 480
 WIN: pygame.Surface = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Egg Hunt")
 
+clock = pygame.time.Clock()
+FPS = 60
+
 
 def main() -> None:
     basket = Basket(WIN)
@@ -46,6 +49,7 @@ def main() -> None:
         basket.draw(WIN)
 
         pygame.display.update()
+        clock.tick(FPS)
 
 
 if __name__ == '__main__':
