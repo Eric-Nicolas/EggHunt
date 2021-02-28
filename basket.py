@@ -18,7 +18,7 @@ class Basket(pygame.sprite.Sprite):
         self.rect.x = (self.win_width - self.image.get_width()) // 2
         self.rect.y = window.get_height() - self.image.get_height() - 75
         self.x_change = 0
-        self.speed = 4
+        self.speed = 5
 
     def idle(self):
         self.x_change = 0

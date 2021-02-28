@@ -2,6 +2,7 @@
 import pygame
 import os
 import random
+from score_bar import ScoreBar
 
 
 __author__ = 'Eric-Nicolas'
@@ -20,11 +21,17 @@ class Egg(pygame.sprite.Sprite):
         self.rect.y = 0
         self.speed = 2
 
+    def go_top(self, score_bar: ScoreBar) -> None:
+        self.rect.y = 0
+        self.rect.x = random.randint(0, self.win_width - self.image.get_width())
+        if score_bar.is_winning() and score_bar.get_score() % 5 == 0:
+            self.speed += 1
+
     def fall(self) -> None:
         self.rect.y += self.speed
-        if self.rect.y >= self.win_height - self.image.get_height() - 75:
-            self.rect.y = 0
-            self.rect.x = random.randint(0, self.win_width - self.image.get_width())
 
-    def draw(self, window: pygame.Surface):
+    def has_fallen(self) -> bool:
+        return self.rect.y >= self.win_height - self.image.get_height() - 75
+
+    def draw(self, window: pygame.Surface) -> None:
         window.blit(self.image, self.rect)
