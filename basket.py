@@ -8,7 +8,6 @@ __author__ = 'Eric-Nicolas'
 
 class Basket:
     def __init__(self, window: pygame.Surface) -> None:
-        super().__init__()
         self.win_width = window.get_width()
         self.image: pygame.Surface = pygame.transform.scale(
             pygame.image.load(os.path.join('assets', 'basket.png')),

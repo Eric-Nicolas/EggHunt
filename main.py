@@ -2,6 +2,7 @@
 import pygame
 import os
 from basket import Basket
+from egg import Egg
 
 
 __author__ = 'Eric-Nicolas'
@@ -23,6 +24,8 @@ FPS = 60
 
 def main() -> None:
     basket = Basket(WIN)
+    egg = Egg(WIN)
+
     is_running = True
 
     while is_running:
@@ -41,11 +44,13 @@ def main() -> None:
             basket.idle()
 
         basket.update()
+        egg.fall()
 
         WIN.fill(WHITE)
         WIN.blit(BACKGROUND_IMG, (0, 0))
         WIN.blit(GROUND_IMG, (0, 0))
 
+        egg.draw(WIN)
         basket.draw(WIN)
 
         pygame.display.update()
