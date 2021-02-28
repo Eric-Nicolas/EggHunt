@@ -28,6 +28,6 @@ class ScoreBar:
         self.score -= 1
 
     def draw(self, window: pygame.Surface) -> None:
-        self.width = self.default_width + self.score * 10
+        self.width = self.default_width + self.score * 200
         pygame.draw.rect(window, self.bg_color, (0, 0, window.get_width(), self.thickness))
         pygame.draw.rect(window, self.color, (0, 0, self.width, self.thickness))
