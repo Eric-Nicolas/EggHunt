@@ -11,11 +11,13 @@ pygame.init()
 BACKGROUND_IMG = pygame.image.load(os.path.join('assets', 'background.jpg'))
 GROUND_IMG = pygame.image.load(os.path.join('assets', 'ground.png'))
 
+WHITE = (255, 255, 255)
+
 WIDTH, HEIGHT = 800, 480
 WIN: pygame.Surface = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Egg Hunt")
 
-basket = Basket()
+basket = Basket(WIN)
 
 is_running = True
 while is_running:
@@ -24,6 +26,7 @@ while is_running:
             pygame.quit()
             quit()
 
+    WIN.fill(WHITE)
     WIN.blit(BACKGROUND_IMG, (0, 0))
     WIN.blit(GROUND_IMG, (0, 0))
 
