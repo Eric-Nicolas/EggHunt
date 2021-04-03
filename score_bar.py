@@ -10,11 +10,11 @@ class ScoreBar:
         self._DEFAULT_WIDTH = window.get_width() // 2
         self._THICKNESS = 10
 
-        self.score = 0
+        self._score = 0
         self._width = self._DEFAULT_WIDTH
 
     def get_score(self):
-        return self.score
+        return self._score
 
     def is_winning(self):
         return self._width > self._DEFAULT_WIDTH
@@ -24,12 +24,12 @@ class ScoreBar:
 
     def increase_score(self):
         if self._width < self._WIN.get_width():
-            self.score += 1
+            self._score += 1
 
     def decrease_score(self):
-        self.score -= 1
+        self._score -= 1
 
     def draw(self, window):
-        self._width = self._DEFAULT_WIDTH + self.score * 200
+        self._width = self._DEFAULT_WIDTH + self._score * 200
         pygame.draw.rect(window, self._BG_COLOR, (0, 0, window.get_width(), self._THICKNESS))
         pygame.draw.rect(window, self._COLOR, (0, 0, self._width, self._THICKNESS))
