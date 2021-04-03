@@ -70,8 +70,8 @@ class Game:
         self._WIN.blit(self.GROUND_IMG, (0, 0))
 
     def draw_entities(self):
-        self.egg.draw(self._WIN)
         self.basket.draw(self._WIN)
+        self.egg.draw(self._WIN)
         self.score_bar.draw(self._WIN)
 
     def run(self):
