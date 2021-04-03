@@ -5,7 +5,7 @@ from game import Game
 __author__ = 'Eric-Nicolas'
 
 
-def main() -> None:
+def main():
     game = Game()
     game.run()
 
