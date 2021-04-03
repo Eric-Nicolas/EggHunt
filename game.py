@@ -1,4 +1,3 @@
-# coding: utf-8
 import pygame
 import os
 from basket import Basket
