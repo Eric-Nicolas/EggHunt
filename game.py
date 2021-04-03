@@ -44,10 +44,13 @@ class Game:
     def update(self):
         if not self._score_bar.is_empty():
             keys_pressed = pygame.key.get_pressed()
-            if keys_pressed[pygame.K_LEFT]:
+            if keys_pressed[pygame.K_a] or keys_pressed[pygame.K_LEFT]:
                 self._basket.move_left()
-            elif keys_pressed[pygame.K_RIGHT]:
+            elif keys_pressed[pygame.K_d] or keys_pressed[pygame.K_RIGHT]:
                 self._basket.move_right()
+            elif keys_pressed[pygame.K_ESCAPE]:
+                pygame.quit()
+                quit()
             else:
                 self._basket.idle()
 
