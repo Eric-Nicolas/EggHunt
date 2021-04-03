@@ -19,13 +19,18 @@ class Game:
         self._BACKGROUND_IMG = pygame.image.load(os.path.join('assets', 'img', 'background.jpg'))
         self._GROUND_IMG = pygame.image.load(os.path.join('assets', 'img', 'ground.png'))
 
-        self._BLACK = (0, 0, 0)
-        self._WHITE = (255, 255, 255)
+        self._PICKED_EGG_SOUND = pygame.mixer.Sound(os.path.join('assets', 'sfx', 'picked_egg.wav'))
+        self._LOST_EGG_SOUND = pygame.mixer.Sound(os.path.join('assets', 'sfx', 'lost_egg.wav'))
+        self._GAME_OVER_SOUND = pygame.mixer.Sound(os.path.join('assets', 'sfx', 'game_over.wav'))
 
         self._WIDTH, self._HEIGHT = 800, 480
         self._WIN = pygame.display.set_mode((self._WIDTH, self._HEIGHT))
+
         pygame.display.set_caption("Egg Hunt")
         pygame.display.set_icon(ICON_IMG)
+
+        self._BLACK = (0, 0, 0)
+        self._WHITE = (255, 255, 255)
 
         self._FONT = pygame.font.Font(None, 60)
 
@@ -53,9 +58,11 @@ class Game:
             if pygame.sprite.collide_rect(self._basket, self._egg):
                 self._egg.go_top(self._score_bar)
                 self._score_bar.increase_score()
+                self._PICKED_EGG_SOUND.play()
             elif self._egg.has_fallen():
                 self._egg.go_top(self._score_bar)
                 self._score_bar.decrease_score()
+                self._LOST_EGG_SOUND.play()
 
     def draw_background(self):
         self._WIN.fill(self._WHITE)
@@ -86,6 +93,8 @@ class Game:
                 # Show game over for 2 seconds
                 self.game_over()
                 timer += 1
+                if timer == 1:
+                    self._GAME_OVER_SOUND.play()
                 if timer > self._FPS * 2:
                     is_running = False
 
