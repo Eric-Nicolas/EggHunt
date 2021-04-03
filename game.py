@@ -17,7 +17,7 @@ class Game:
             (32, 32)
         )
         self._BACKGROUND_IMG = pygame.image.load(os.path.join('assets', 'background.jpg'))
-        self.GROUND_IMG = pygame.image.load(os.path.join('assets', 'ground.png'))
+        self._GROUND_IMG = pygame.image.load(os.path.join('assets', 'ground.png'))
 
         self._BLACK = (0, 0, 0)
         self._WHITE = (255, 255, 255)
@@ -27,75 +27,73 @@ class Game:
         pygame.display.set_caption("Egg Hunt")
         pygame.display.set_icon(ICON_IMG)
 
-        self.FONT = pygame.font.Font(None, 60)
+        self._FONT = pygame.font.Font(None, 60)
 
-        self.clock = pygame.time.Clock()
-        self.FPS = 60
+        self._CLOCK = pygame.time.Clock()
+        self._FPS = 60
 
-        self.basket = Basket(self._WIN)
-        self.egg = Egg(self._WIN)
-        self.score_bar = ScoreBar(self._WIN)
-
-    def check_event(self):
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
+        self._basket = Basket(self._WIN)
+        self._egg = Egg(self._WIN)
+        self._score_bar = ScoreBar(self._WIN)
 
     def update(self):
-        if not self.score_bar.is_empty():
+        if not self._score_bar.is_empty():
             keys_pressed = pygame.key.get_pressed()
             if keys_pressed[pygame.K_LEFT]:
-                self.basket.move_left()
+                self._basket.move_left()
             elif keys_pressed[pygame.K_RIGHT]:
-                self.basket.move_right()
+                self._basket.move_right()
             else:
-                self.basket.idle()
+                self._basket.idle()
 
-            self.basket.update()
-            self.egg.fall()
+            self._basket.update()
+            self._egg.fall()
 
             # Collision
-            if pygame.sprite.collide_rect(self.basket, self.egg):
-                self.egg.go_top(self.score_bar)
-                self.score_bar.increase_score()
-            elif self.egg.has_fallen():
-                self.egg.go_top(self.score_bar)
-                self.score_bar.decrease_score()
+            if pygame.sprite.collide_rect(self._basket, self._egg):
+                self._egg.go_top(self._score_bar)
+                self._score_bar.increase_score()
+            elif self._egg.has_fallen():
+                self._egg.go_top(self._score_bar)
+                self._score_bar.decrease_score()
 
     def draw_background(self):
         self._WIN.fill(self._WHITE)
         self._WIN.blit(self._BACKGROUND_IMG, (0, 0))
-        self._WIN.blit(self.GROUND_IMG, (0, 0))
+        self._WIN.blit(self._GROUND_IMG, (0, 0))
 
     def draw_entities(self):
-        self.basket.draw(self._WIN)
-        self.egg.draw(self._WIN)
-        self.score_bar.draw(self._WIN)
+        self._basket.draw(self._WIN)
+        self._egg.draw(self._WIN)
+        self._score_bar.draw(self._WIN)
 
     def run(self):
         timer = 0
         is_running = True
 
         while is_running:
-            self.check_event()
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    quit()
+
             self.update()
             self.draw_background()
 
-            if not self.score_bar.is_empty():
+            if not self._score_bar.is_empty():
                 self.draw_entities()
             else:
-                # Show game over for 3 seconds
+                # Show game over for 2 seconds
                 self.game_over()
                 timer += 1
-                if timer > self.FPS * 2:
+                if timer > self._FPS * 2:
                     is_running = False
 
             pygame.display.update()
-            self.clock.tick(self.FPS)
+            self._CLOCK.tick(self._FPS)
 
     def game_over(self):
-        label: pygame.Surface = self.FONT.render("Game Over", True, self._BLACK)
+        label = self._FONT.render("Game Over", True, self._BLACK)
         self._WIN.blit(label, (
             (self._WIDTH - label.get_width()) // 2,
             (self._HEIGHT - label.get_height()) // 2
