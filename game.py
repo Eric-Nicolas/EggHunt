@@ -13,11 +13,11 @@ class Game:
         pygame.init()
 
         ICON_IMG = pygame.transform.scale(
-            pygame.image.load(os.path.join('assets', 'chocolate.png')),
+            pygame.image.load(os.path.join('assets', 'img', 'chocolate.png')),
             (32, 32)
         )
-        self._BACKGROUND_IMG = pygame.image.load(os.path.join('assets', 'background.jpg'))
-        self._GROUND_IMG = pygame.image.load(os.path.join('assets', 'ground.png'))
+        self._BACKGROUND_IMG = pygame.image.load(os.path.join('assets', 'img', 'background.jpg'))
+        self._GROUND_IMG = pygame.image.load(os.path.join('assets', 'img', 'ground.png'))
 
         self._BLACK = (0, 0, 0)
         self._WHITE = (255, 255, 255)

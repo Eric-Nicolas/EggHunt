@@ -10,7 +10,7 @@ class Basket(pygame.sprite.Sprite):
         super().__init__()
         self._WIN_WIDTH = window.get_width()
         self._IMG = pygame.transform.scale(
-            pygame.image.load(os.path.join('assets', 'basket.png')),
+            pygame.image.load(os.path.join('assets', 'img', 'basket.png')),
             (100, 100)
         )
         self.rect = self._IMG.get_rect()

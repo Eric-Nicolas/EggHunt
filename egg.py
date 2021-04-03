@@ -11,7 +11,7 @@ class Egg(pygame.sprite.Sprite):
         super().__init__()
         self._WIN_WIDTH, self._WIN_HEIGHT = window.get_width(), window.get_height()
         self._IMG = pygame.transform.scale(
-            pygame.image.load(os.path.join('assets', 'chocolate_egg.png')),
+            pygame.image.load(os.path.join('assets', 'img', 'chocolate_egg.png')),
             (50, 50)
         )
         self.rect = self._IMG.get_rect()
