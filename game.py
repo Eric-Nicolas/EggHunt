@@ -44,7 +44,7 @@ class Game:
     def update(self):
         if not self._score_bar.is_empty():
             keys_pressed = pygame.key.get_pressed()
-            if keys_pressed[pygame.K_a] or keys_pressed[pygame.K_LEFT]:
+            if keys_pressed[pygame.K_q] or keys_pressed[pygame.K_LEFT]:
                 self._basket.move_left()
             elif keys_pressed[pygame.K_d] or keys_pressed[pygame.K_RIGHT]:
                 self._basket.move_right()
@@ -98,7 +98,7 @@ class Game:
                 timer += 1
                 if timer == 1:
                     self._GAME_OVER_SOUND.play()
-                if timer > self._FPS * 2:
+                if timer > self._FPS // 2:
                     is_running = False
 
             pygame.display.update()
